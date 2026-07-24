@@ -459,5 +459,4 @@ local function createLine2D(from, to, color, thickness)
     local mid = (from + to) / 2
 
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, length, 0, thickness or 2)
-    frame.Position = U
+    frame.Size = UDim2.new(
