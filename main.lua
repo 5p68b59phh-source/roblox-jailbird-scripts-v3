@@ -458,12 +458,40 @@ local function clearESP()
         end
     end
     espObjects = {}
-end
-
-local function createLine2D(from, to, color, thickness)
+end ocal function createLine2D(from, to, color, thickness)
     local length = (to - from).Magnitude
     if length < 1 then return nil end
     local angle = math.atan2(to.Y - from.Y, to.X - from.X)
     local mid = (from + to) / 2
 
-    local frame
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, length, 0, thickness or 2)
+    frame.Position = UDim2.new(0, mid.X - length/2, 0, mid.Y - (thickness or 2)/2)
+    frame.BackgroundColor3 = color
+    frame.BackgroundTransparency = 0
+    frame.BorderSizePixel = 0
+    frame.Rotation = math.deg(angle)
+    frame.Parent = espGui
+    return frame
+end
+
+local function createText(text, position, color, size, center)
+    local label = Instance.new("TextLabel")
+    label.Text = text
+    label.TextColor3 = color
+    label.TextScaled = false
+    label.TextSize = size or 14
+    label.Font = Enum.Font.GothamBold
+    label.BackgroundTransparency = 1
+    label.BorderSizePixel = 0
+    label.Size = UDim2.new(0, 200, 0, 30)
+    label.Position = UDim2.new(0, position.X - 100, 0, position.Y - 15)
+    if center then
+        label.TextXAlignment = Enum.TextXAlignment.Center
+    else
+        label.TextXAlignment = Enum.TextXAlignment.Left
+    end
+    label.TextYAlignment = Enum.TextYAlignment.Center
+    label.Parent = espGui
+    return label
+end
